@@ -25,6 +25,17 @@ projectInnerContainerElement.addEventListener('mousedown', (e) => {
     cursorElement.style.display = "block";
 })
 
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    const target = document.getElementById(link.getAttribute('href').slice(1));
+    if (!target) return;
+
+    e.preventDefault();
+    target.scrollIntoView({ behavior: "smooth" });
+})
+
 function mouseMoved(event) {
     const cursorElement = document.getElementById('cursor');
     const rect = mainContainerElement.getBoundingClientRect();

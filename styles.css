@@ -519,9 +519,6 @@
     #cursor {
         display: none !important;
     }
-    #main-container {
-        scroll-snap-type: unset;
-    }
     .section {
         .section-title {
             transition: .5s;
