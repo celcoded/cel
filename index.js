@@ -4,6 +4,7 @@ const projectContainerElement = document.getElementById('project-container');
 const projectInnerContainerElement = document.getElementById('project-inner-container');
 const subTextElement = document.getElementById('subText');
 const cursorElement = document.getElementById('cursor');
+const sections = document.querySelectorAll("section");
 
 typeAnimation();
 mainContainerElement.addEventListener('mousemove', (e) => {
@@ -65,3 +66,19 @@ function typeAnimation() {
     });
     }
 }
+
+let activeSection = null;
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && activeSection !== entry.target) {
+            activeSection = entry.target;
+            document.title = entry.target.dataset.title;
+        }
+    });
+},
+{
+    threshold: .6
+})
+
+sections.forEach(section => observer.observe(section));
