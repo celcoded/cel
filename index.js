@@ -6,6 +6,8 @@ const subTextElement = document.getElementById('subText');
 const sections = document.querySelectorAll("section");
 const cursorElement = document.getElementById('cursor');
 const lightSwitchElement = document.getElementById("light-switch");
+const scrollIndicatorElement = document.getElementById("scroll-indicator");
+const scrollIndicatorEndElement = document.getElementById("scroll-indicator-end");
 
 typeAnimation();
 mainContainerElement.addEventListener('mousemove', (e) => {
@@ -80,18 +82,29 @@ function typeAnimation() {
     }
 }
 
+let isScrollHidden = false;
 let activeSection = null;
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && activeSection !== entry.target) {
-            activeSection = entry.target;
-            document.title = entry.target.dataset.title;
-        }
-    });
-},
-{
-    threshold: .6
-})
+function observeIntersection(isScrollIndicator = false) {
+    return new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (isScrollIndicator && !isScrollHidden) {
+                if (entry.isIntersecting) {
+                    scrollIndicatorElement.style.opacity = 0;
+                    isScrollHidden = true;
+                    return;
+                }
+            }
+            if (entry.isIntersecting && activeSection !== entry.target) {
+                activeSection = entry.target;
+                document.title = entry.target.dataset.title;
+            }
+        });
+    },
+    {
+        threshold: .6
+    })
+}
 
-sections.forEach(section => observer.observe(section));
+sections.forEach(section => observeIntersection().observe(section));
+observeIntersection(true).observe(scrollIndicatorEndElement);
