@@ -88,12 +88,12 @@ let activeSection = null;
 function observeIntersection(isScrollIndicator = false) {
     return new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (isScrollIndicator && !isScrollHidden) {
-                if (entry.isIntersecting) {
+            if (isScrollIndicator) {
+                if (entry.isIntersecting && !isScrollHidden) {
                     scrollIndicatorElement.style.opacity = 0;
                     isScrollHidden = true;
-                    return;
                 }
+                return;
             }
             if (entry.isIntersecting && activeSection !== entry.target) {
                 activeSection = entry.target;
