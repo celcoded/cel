@@ -3,8 +3,9 @@ const mainContainerElement = document.getElementById('main-container');
 const projectContainerElement = document.getElementById('project-container');
 const projectInnerContainerElement = document.getElementById('project-inner-container');
 const subTextElement = document.getElementById('subText');
-const cursorElement = document.getElementById('cursor');
 const sections = document.querySelectorAll("section");
+const cursorElement = document.getElementById('cursor');
+const lightSwitchElement = document.getElementById("light-switch");
 
 typeAnimation();
 mainContainerElement.addEventListener('mousemove', (e) => {
@@ -24,6 +25,18 @@ projectInnerContainerElement.addEventListener('mousedown', (e) => {
     e.stopPropagation();
     cursorElement.style.transform = "scale(.8)"
     cursorElement.style.display = "block";
+})
+
+let lightsOn = false;
+lightSwitchElement.addEventListener('click', (e) => {
+    lightsOn = !lightsOn;
+    if (lightsOn) {
+        lightSwitchElement.classList.add("on");
+        mainContainerElement.classList.add("light");
+    } else {
+        lightSwitchElement.classList.remove("on");
+        mainContainerElement.classList.remove("light");
+    }
 })
 
 document.addEventListener('click', (e) => {
