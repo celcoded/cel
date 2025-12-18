@@ -98,6 +98,10 @@ function observeIntersection(isScrollIndicator = false) {
             if (entry.isIntersecting && activeSection !== entry.target) {
                 activeSection = entry.target;
                 document.title = entry.target.dataset.title;
+
+                if (['intro', 'contact'].includes(activeSection.id)) {
+                    entry.target.appendChild(lightSwitchElement)
+                }
             }
         });
     },
@@ -107,4 +111,5 @@ function observeIntersection(isScrollIndicator = false) {
 }
 
 sections.forEach(section => observeIntersection().observe(section));
+console.log(scrollIndicatorEndElement)
 observeIntersection(true).observe(scrollIndicatorEndElement);
