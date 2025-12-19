@@ -354,12 +354,18 @@
             .project-imgs {
                 height: 100%;
                 display: flex;
-                flex-direction: column;
-                flex-wrap: wrap;
+                flex-direction: row;
                 justify-content: center;
                 align-items: center;
                 gap: var(--fluid-10);
 
+                .project-web-container {
+                    max-height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    overflow: hidden;
+                    gap: var(--fluid-10);
+                }
                 .project-thumbnail {
                     position: relative;
                     flex-shrink: 0;
@@ -367,11 +373,17 @@
                     &.web {
                         max-height: 100%;
                         height: auto;
+                        img {
+                            height: auto;
+                        }
                     }
                     &.mobile {
                         max-width: auto;
                         width: auto;
                         height: 100%;
+                        img {
+                            height: 100%;
+                        }
                     }
                     img {
                         user-select: none;
@@ -379,7 +391,7 @@
                         -webkit-user-drag: none;
                         position: absolute;
                         width: 100%;
-                        height: 100%;
+                        /* height: 100%; */
                         object-fit: contain;
                         opacity: 1;
                         top: 0;
