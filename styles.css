@@ -552,6 +552,7 @@
     align-items: center;
     overflow: hidden;
     z-index: 103;
+    border: var(--light) solid;
     &:hover::after {
         opacity: .8;
     }
